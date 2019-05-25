@@ -1,8 +1,10 @@
+from atalhos import *
+
 g = gt.load_graph("search_example.xml")
 
 verms = [3, 7, 8]
 azuis = [0, 9]
-brancos = [ i if i not in verms and i not in azuis for i in range(g.num_vertices())]
+brancos = [i for i in range(g.num_vertices()) if i not in verms and i not in azuis]
 
 cores = g.new_vertex_property("string")
 

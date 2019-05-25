@@ -1,6 +1,5 @@
 from gurobipy import *
-from atalhos.py import *
-from classifica.py import *
+from classifica import *
 import itertools
 
 # This example formulates and solves the following simple MIP model:
@@ -23,10 +22,13 @@ try:
 
 	# Add constraint: x[i] + x[j] + x[k] >= 1
 	atalhos(g)
+
+	nome = lambda a, b, c : "c" + str(a) + '_' + str(b) + '_' + str(c)
+
 	for par_verm in itertools.product(verms, verms):
 		if (par_verm[0] < par_verm[1]):
-			nome = str(par_verm[0]) + '_' + str(par_verm[1]) + '_' + str(z)
-			[m.addConstr(x[par_verm[0]] + x[par_verm[1]] + x[z] >= 1, "c" + nome) for z in azuis if pertence(g, par_verm[0], par_verm[1], z)]
+			#nome = str(par_verm[0]) + '_' + str(par_verm[1]) + '_' + str(z)
+			[m.addConstr(x[par_verm[0]] + x[par_verm[1]] + x[z] >= 1, nome(par_verm[0], par_verm[1], z)) for z in azuis if pertence(g, par_verm[0], par_verm[1], z)]
 
 	# Optimize model
 	m.optimize()
