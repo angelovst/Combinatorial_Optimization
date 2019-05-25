@@ -1,5 +1,9 @@
 import graph_tool.all as gt
 
+VERMELHO = '#FF0000'
+AZUL = '#729fcf'
+BRANCO = '#ffffff'
+
 class VisitanteAtalhos(gt.BFSVisitor):
 
 	def __init__(self, dist, p, num_vertices):
@@ -30,7 +34,13 @@ def atalhos(g):
 		g.vertex_properties["distancia" + str(v)] = dist
 		g.vertex_properties["p" + str(v)] = p
 
+def pertence(g, v, w, z):
+	if v == z or w == z:
+		return True
 
-g = gt.load_graph("search_example.xml")
-atalhos(g)
-gt.graph_draw(g, pos=g.vp["pos"], vertex_text=g.vp["p0"], vertex_font_size=12, vertex_shape="double_circle",vertex_fill_color="#729fcf", vertex_pen_width=3, output="search_example.pdf")
+	for i in g.vp["p" + str(v)][w]:
+		if(pertence(g, v, i, z)):
+			return True
+
+	return False
+
