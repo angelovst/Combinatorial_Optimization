@@ -43,7 +43,7 @@ def pertence(g, v, w, z):
 			return True
 
 	return False
-	
+
 def cruza(g, v, w, z):
 	if v in z or w in z:
 		return True
@@ -60,13 +60,3 @@ def cruzam(g, v, w, y, z, s):
 			return True
 			
 	return False
-
-
-
-
-
-
-
-
-
-
