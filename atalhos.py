@@ -43,4 +43,30 @@ def pertence(g, v, w, z):
 			return True
 
 	return False
+	
+def cruza(g, v, w, z):
+	if v in z or w in z:
+		return True
+
+	for i in g.vp["p" + str(v)][w]:
+		if(cruza(g, v, i, z)):
+			return True
+
+	return False
+		
+def cruzam(g, v, w, y, z, s):
+	for i in s:
+		if(pertence(g, v, w, i) and pertence(g, y, z, i)):
+			return True
+			
+	return False
+
+
+
+
+
+
+
+
+
 
