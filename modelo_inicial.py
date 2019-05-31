@@ -100,6 +100,7 @@ try:
 	m._brancos = brancos
 	m._coloridos = verms + azuis
 	m._g = g
+	m.Params.LazyConstraints = 1 
 	m.optimize(separacao)
 
 

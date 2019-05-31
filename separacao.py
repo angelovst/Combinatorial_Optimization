@@ -37,5 +37,3 @@ def separacao(model, where):
 		if pertence(model._g, vSol, aSol) or pertence(model._g, aSol, vSol) or cruzam(model._g, aSol, vSol, model._brancos):
 			print(quicksum([model._vars[i] for i in aSol + vSol]) >= 1)
 			model.cbLazy(quicksum([model._vars[i] for i in aSol + vSol]) >= 1)
-
-		
