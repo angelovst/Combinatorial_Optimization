@@ -1,4 +1,5 @@
 from gurobipy import *
+from atalhos import pertence
 
 def listaDe(k, l, tuplas):
 	for par in tuplas[k]:
@@ -25,6 +26,16 @@ def separacao(model, where):
 								if i in lista and j in lista:
 									model.cbCut(model._vars[i] + model._vars[j] + model._vars[k] + model._vars[l] >= 2)
 									print(model._vars[i] + model._vars[j] + model._vars[k] + model._vars[l] >= 2)
-									#Imnprimir os valores das variáveis >> Tarefa
+									print("{} {} {} {}".format(x[i], x[j], x[k], x[l]))
 									return
+	elif where == GRB.Callback.MIPSOL:	
+		print("#######################################################")
+		sol = model.cbGetSolution(model._vars)
+		aSol = [i for i in model._azuis if sol[i] < 1]
+		vSol = [i for i in model._verms if sol[i] < 1]
+	
+		if pertence(model._g, vSol, aSol) or pertence(model._g, aSol, vSol) or cruzam(model._g, aSol, vSol, model._brancos):
+			print(quicksum([model._vars[i] for i in aSol + vSol]) >= 1)
+			model.cbLazy(quicksum([model._vars[i] for i in aSol + vSol]) >= 1)
 
+		

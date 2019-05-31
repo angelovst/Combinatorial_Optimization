@@ -48,7 +48,7 @@ try:
 	m = Model("Classifica")
 
 	# Create variables
-	x = [m.addVar(vtype=GRB.BINARY, name="x_{}".format(g.vertex_index[v])) for v in g.get_vertices()] 
+	x = m.addVars([g.vertex_index[v] for v in g.get_vertices()], vtype=GRB.BINARY, name="x") 
 
 	print(1)
 	
@@ -65,27 +65,27 @@ try:
 	naoArestas(g, azuis, tuplas)
 
 	print(2)
-
+	'''
 	for verm in verms:
 		for par_verm in tuplas[verm]:
 			#print(str(par_verm[0]) + '_' + str(par_verm[1]))
-			par_verm[1] += [z for z in pertencem(g, verm, par_verm[0], azuis)]
+			par_verm[1] += [z for z in pertencem(g, [verm, par_verm[0]], azuis)]
 			[m.addConstr(x[verm] + x[par_verm[0]] + x[z] >= 1, nome(verm, par_verm[0], z)) for z in par_verm[1]]
 			#print([nome(par_verm[0], par_verm[1], z) for z in pertencem(g, par_verm[0], par_verm[1], azuis)])
-
+	'''
 	print(3)
 
-	for azul in azuis:
+	'''for azul in azuis:
 		for par_azul in tuplas[azul]:
 			#nome = str(par_azul[0]) + '_' + str(par_azul[1]) + '_' + str(z)
-			par_azul[1] += [z for z in pertencem(g, azul, par_azul[0], verms)]
+			par_azul[1] += [z for z in pertencem(g, [azul, par_azul[0]], verms)]
 			[m.addConstr(x[azul] + x[par_azul[0]] + x[z] >= 1, nome(azul, par_azul[0], z)) for z in par_azul[1]]
-
+	'''
 	print(4)
 	'''		
 	# Add constraint: x[i] + x[j] + x[k] + x[l] >= 1			
 	for pares in itertools.product([(a, b[0]) for a in azuis for b in tuplas[a]], [(a, b[0]) for a in verms for b in tuplas[a]]):
-		if (cruzam(g, pares[0][0], pares[0][1], pares[1][0], pares[1][1], brancos)):
+		if (cruzam(g, [pares[0][0], pares[0][1]], [pares[1][0], pares[1][1]], brancos)):
 			nomes = str(pares[0][0]) + '_' + str(pares[0][1]) + '_' + str(pares[1][0]) + '_' + str(pares[1][1])
 			m.addConstr(x[pares[0][0]] + x[pares[0][1]] + x[pares[1][0]] + x[pares[1][1]] >= 1, "c" + nomes)				
 	'''
@@ -95,7 +95,11 @@ try:
 	# Optimize model
 	m._vars = x
 	m._tuplas = tuplas
+	m._verms = verms
+	m._azuis = azuis
+	m._brancos = brancos
 	m._coloridos = verms + azuis
+	m._g = g
 	m.optimize(separacao)
 
 
