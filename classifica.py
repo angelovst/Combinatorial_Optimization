@@ -10,6 +10,11 @@ azuis = random.sample([i for i in range(0, g.num_vertices()) if i not in verms],
 brancos = [i for i in range(g.num_vertices()) if i not in verms and i not in azuis]
 
 cores = g.new_vertex_property("string")
+verms.sort()
+azuis.sort()
+print(verms)
+print(azuis)
+print(set(verms) & set(azuis))
 
 for i in verms:
 	cores[g.vertex(i)] = VERMELHO

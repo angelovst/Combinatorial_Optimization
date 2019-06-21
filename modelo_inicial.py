@@ -65,22 +65,22 @@ try:
 	naoArestas(g, azuis, tuplas)
 
 	print(2)
-	'''
+	
 	for verm in verms:
 		for par_verm in tuplas[verm]:
 			#print(str(par_verm[0]) + '_' + str(par_verm[1]))
 			par_verm[1] += [z for z in pertencem(g, [verm, par_verm[0]], azuis)]
 			[m.addConstr(x[verm] + x[par_verm[0]] + x[z] >= 1, nome(verm, par_verm[0], z)) for z in par_verm[1]]
 			#print([nome(par_verm[0], par_verm[1], z) for z in pertencem(g, par_verm[0], par_verm[1], azuis)])
-	'''
+	
 	print(3)
 
-	'''for azul in azuis:
+	for azul in azuis:
 		for par_azul in tuplas[azul]:
 			#nome = str(par_azul[0]) + '_' + str(par_azul[1]) + '_' + str(z)
 			par_azul[1] += [z for z in pertencem(g, [azul, par_azul[0]], verms)]
 			[m.addConstr(x[azul] + x[par_azul[0]] + x[z] >= 1, nome(azul, par_azul[0], z)) for z in par_azul[1]]
-	'''
+	
 	print(4)
 	'''		
 	# Add constraint: x[i] + x[j] + x[k] + x[l] >= 1			
@@ -102,7 +102,7 @@ try:
 	m._g = g
 	m.Params.LazyConstraints = 1 
 	m.optimize(separacao)
-
+	#m.optimize()
 
 	for v in m.getVars():
 		print('%s %g' % (v.varName, v.x))
