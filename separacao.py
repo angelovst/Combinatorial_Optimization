@@ -1,5 +1,6 @@
 from gurobipy import *
 from atalhos import pertence
+from atalhos import cruzam
 
 def listaDe(k, l, tuplas):
 	for par in tuplas[k]:
@@ -34,8 +35,11 @@ def separacao(model, where):
 		print("#######################################################")
 		sol = model.cbGetSolution(model._vars)
 		aSol = [i for i in model._azuis if sol[i] < 0.9]
+		if not aSol:
+			return 
 		vSol = [i for i in model._verms if sol[i] < 0.9]
-
+		if not vSol:
+			return 
 		print(model.cbGet(GRB.Callback.MIPSOL_OBJ))
 		"""
 		print([(sol[a], a in aSol) for a in model._azuis])

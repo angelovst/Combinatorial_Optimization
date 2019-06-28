@@ -1,8 +1,11 @@
 import graph_tool.all as gt
 
 VERMELHO = '#FF0000'
-AZUL = '#729fcf'
+AZUL = '#0000ff'
 BRANCO = '#ffffff'
+CINZA = '#808080'
+AZUL_CLARO = '#ccccff'
+VERMELHO_CLARO = '#ffcccc'
 
 class VisitanteAtalhos(gt.BFSVisitor):
 
@@ -79,7 +82,6 @@ def pertencem(g, s, z):
 def pertenceRec(g, s, z):
 	if z in s:
 		return True
-
 	if g.vp.marcados[s[0]]:
 		return False
 
@@ -90,7 +92,7 @@ def pertenceRec(g, s, z):
 		for i in g.vp["p" + str(v)][aux]:			
 			s[0] = i
 			if(pertenceRec(g, s, z)):
-				#s[0] = aux
+				s[0] = aux
 				return True
 	
 	s[0] = aux
@@ -107,13 +109,15 @@ def pertenceRec(g, s, z):
 def cruzam(g, s1, s2, s):
 	marcados = g.new_vertex_property("bool")
 	g.vp.marcados = marcados
-
 	falsos = [False for _ in g.vertices()]
 
 	for i in s:
-		if pertenceInicio(g, s1, i, falsos) and pertenceInicio(g, s2, i, falsos):
-			del g.vertex_properties["marcados"]
-			return True
+		pertence_s1 = pertenceInicio(g, s1, i, falsos)
+		if pertence_s1:
+			pertence_s2 = pertenceInicio(g, s2, i, falsos)
+			if pertence_s2:
+				del g.vertex_properties["marcados"]
+				return True
 	
 	del g.vertex_properties["marcados"]
 	return False
