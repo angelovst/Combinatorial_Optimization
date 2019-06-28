@@ -1,0 +1,31 @@
+Tarefas:
+
+*Pendencias da última aula
+
+*Exigir solução com no mínimo dois vértices de cada cor (Em cada cor a soma das variáveis <= quantidade - 2)
+
+*Setar a cor dos em branco remanescentes com a cor que mais aparece na vizinhança em ordem de grau crescente (em caso de empate, escolha arbitrária)
+
+SEÇÕES DO RELATÓRIO
+explicar algoritmo, colocar código de cada função
+
+Pertence
+
+Cruzam
+
+Definição do problema, Modelo inicial
+
+Lazy
+
+Cortes
+
+Resultados
+descrever os grafos -> num vertices, num arestas e descrição do dataset
+	adjnoun
+	Dolphin
+	karate
+colocar figuras
+
+valor da solução inicial
+valor da sol ótima
+qtd lazy, cortes e tempo
