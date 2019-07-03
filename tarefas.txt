@@ -4,7 +4,7 @@ Tarefas:
 
 *Exigir solução com no mínimo dois vértices de cada cor (Em cada cor a soma das variáveis <= quantidade - 2)
 
-*Setar a cor dos em branco remanescentes com a cor que mais aparece na vizinhança em ordem de grau crescente (em caso de empate, escolha arbitrária)
+*Setar a cor dos em branco remanescentes com a cor que mais aparece na vizinhança em ordem de grau crescente (em caso de empate, escolha arbitrária) FEITO
 
 SEÇÕES DO RELATÓRIO
 explicar algoritmo, colocar código de cada função

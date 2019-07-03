@@ -4197,3 +4197,46 @@ Solution count 3: 9 10 12
 
 Optimal solution found (tolerance 1.00e-04)
 Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Gurobi 8.1.1 (linux64, Python) logging started Qua 03 Jul 2019 09:34:28 -03
+
+Academic license - for non-commercial use only
+Changed value of parameter LazyConstraints to 1
+   Prev: 0  Min: 0  Max: 1  Default: 0
+Optimize a model with 116 rows, 62 columns and 348 nonzeros
+Variable types: 0 continuous, 62 integer (62 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+
+Loaded MIP start with objective 12
+
+Presolve time: 0.00s
+Presolved: 116 rows, 62 columns, 348 nonzeros
+Variable types: 0 continuous, 62 integer (62 binary)
+
+Root relaxation: objective 8.000000e+00, 26 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    8.00000    0   15   12.00000    8.00000  33.3%     -    1s
+     0     0    8.00000    0   20   12.00000    8.00000  33.3%     -   13s
+     0     0    8.00000    0   20   12.00000    8.00000  33.3%     -   13s
+H    0     0                      11.0000000    8.00000  27.3%     -   15s
+H    0     0                       9.0000000    8.00000  11.1%     -   19s
+     0     0    8.00000    0   20    9.00000    8.00000  11.1%     -   19s
+
+Cutting planes:
+  MIR: 2
+  Lazy constraints: 61
+
+Explored 1 nodes (90 simplex iterations) in 19.94 seconds
+Thread count was 4 (of 4 available processors)
+
+Solution count 3: 9 11 12 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%

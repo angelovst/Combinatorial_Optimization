@@ -60,10 +60,10 @@ def pertence(g, s, z):
 		ret = pertenceInicio(g, s, var, falsos[:])
 		if ret:
 			del g.vertex_properties["marcados"]		
-			return True
+			return True, var
 	
 	del g.vertex_properties["marcados"]
-	return False
+	return False, -1
 
 
 def pertenceInicio(g, s, i, falsos):
