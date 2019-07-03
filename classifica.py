@@ -136,6 +136,33 @@ try:
 	for i in pertencem(g, verms_solucao, brancos):
 		cores[g.vertex(i)] = VERMELHO_CLARO
 
+	for v in g.get_vertices():
+			if cores[v] == BRANCO:
+				temBranco = True
+
+	while temBranco:
+		for v in g.get_vertices():
+			if cores[v] == BRANCO:
+				print(x[v])
+				contadorAzul = 0
+				contadorVerm = 0
+				for viz in g.vertex(v).all_neighbors():
+					if cores[g.vertex(viz)] == VERMELHO or cores[g.vertex(viz)] == VERMELHO_CLARO:
+						contadorVerm += 1
+					if cores[g.vertex(viz)] == AZUL or cores[g.vertex(viz)] == AZUL_CLARO:
+						contadorAzul += 1
+				if contadorVerm > contadorAzul:
+					cores[v] = VERMELHO_CLARO
+				elif contadorVerm < contadorAzul:
+					cores[v] = AZUL_CLARO
+				else:
+					cores[v] = VERMELHO_CLARO
+		temBranco = False
+		for v in g.get_vertices():
+			if cores[v] == BRANCO:
+				temBranco = True
+
+
 	gt.graph_draw(g, vertex_text=g.vertex_index, vertex_font_size=12, vertex_shape="double_circle",vertex_fill_color=cores, vertex_color = cor_borda, vertex_pen_width=3, output="huhu.pdf")
 
 	print('Obj: %g' % m.objVal)

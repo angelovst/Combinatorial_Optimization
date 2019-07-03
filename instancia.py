@@ -3,7 +3,8 @@ import random
 import copy
 
 #g = gt.load_graph("huhu.xml")
-g = gt.collection.data["adjnoun"]
+g = gt.collection.data["dolphins"]
+#g = gt.collection.data["karate"]
 random.seed(1)
 #nome = g.new_graph_property("nome");
 
