@@ -1,6 +1,6 @@
 Tarefas:
 
-*Pendencias da última aula
+*Pendencias da última aula (21/06) FEITO
 
 *Exigir solução com no mínimo dois vértices de cada cor (Em cada cor a soma das variáveis <= quantidade - 2)
 

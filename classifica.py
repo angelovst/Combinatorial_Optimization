@@ -93,16 +93,17 @@ try:
 	'''
 	print(5)
 
-	for v in g.get_vertices():
-		x[g.vertex_index[v]].start = 0.0
+	nAzul = random.randint(1, len(azuis))
+	azuisSelecionados = random.sample(azuis,nAzul)
 
-	if len(verms) > len(azuis):
-		for i in azuis:
-			x[i].start = 1.0
-		
-	else:
-		for i in verms:
-			x[i].start = 1.0
+	for i in azuisSelecionados:
+		x[i].start = 1.0
+
+	nVermelho = random.randint(1, len(verms))
+	vermsSelecionados = random.sample(verms,nVermelho)
+
+	for i in vermsSelecionados:
+		x[i].start = 1.0
 		
 
 	# Optimize model
@@ -143,7 +144,6 @@ try:
 	while temBranco:
 		for v in g.get_vertices():
 			if cores[v] == BRANCO:
-				print(x[v])
 				contadorAzul = 0
 				contadorVerm = 0
 				for viz in g.vertex(v).all_neighbors():
