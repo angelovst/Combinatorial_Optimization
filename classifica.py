@@ -1,5 +1,6 @@
 from gurobipy import *
-from instancia import *
+#from instancia import *
+from instancia_adjnoun import *
 from separacao import *
 import itertools
 
@@ -67,13 +68,30 @@ try:
 			[m.addConstr(x[azul] + x[par_azul[0]] + x[z] >= 1, nome(azul, par_azul[0], z)) for z in par_azul[1]]
 	
 	print(4)
-	'''		
-	# Add constraint: x[i] + x[j] + x[k] + x[l] >= 1			
-	for pares in itertools.product([(a, b[0]) for a in azuis for b in tuplas[a]], [(a, b[0]) for a in verms for b in tuplas[a]]):
-		if (cruzam(g, [pares[0][0], pares[0][1]], [pares[1][0], pares[1][1]], brancos)):
-			nomes = str(pares[0][0]) + '_' + str(pares[0][1]) + '_' + str(pares[1][0]) + '_' + str(pares[1][1])
-			m.addConstr(x[pares[0][0]] + x[pares[0][1]] + x[pares[1][0]] + x[pares[1][1]] >= 1, "c" + nomes)				
-	'''
+
+	subBrancos = [i for i in brancos if len([j for j in g.vertex(i).all_neighbors() if cores[j] != BRANCO]) > 2]
+
+	print (len(brancos), len(subBrancos))
+	
+
+	# Add constraint: x[i] + x[j] + x[k] + x[l] >= 1	
+	for a in azuis:
+		contador2 = 1
+		for b in tuplas[a]:
+			if contador2 == 5: break
+			contador = 1
+			for c in verms:
+				if contador == 2 or contador2 == 5: break
+				for d in tuplas[c]:
+					if contador == 2 or contador2 == 5: break
+					#print (pares)
+					if (cruzam(g, [a, b[0]], [c, d[0]], subBrancos)):
+						nomes = str(a) + '_' + str(b[0]) + '_' + str(c) + '_' + str(d[0])
+						print(x[a] + x[b[0]] + x[c] + x[d[0]] >= 1)
+						m.addConstr(x[a] + x[b[0]] + x[c] + x[d[0]] >= 1, "c" + nomes)
+						contador += 1
+						contador2 += 1				
+	
 	print(5)
 
 	for v in g.get_vertices():
@@ -144,7 +162,7 @@ try:
 				temBranco = True
 
 
-	gt.graph_draw(g, vertex_text=g.vertex_index, vertex_font_size=12, vertex_shape="double_circle",vertex_fill_color=cores, vertex_color = cor_borda, vertex_pen_width=3, output="huhu.pdf")
+	gt.graph_draw(g, vertex_text=g.vertex_index, vertex_font_size=12, vertex_shape="double_circle",vertex_fill_color=cores, vertex_color = cor_borda, vertex_pen_width=3, output_size = (1500, 1000), output="huhu.pdf", pos = gt.arf_layout(g, max_iter=0))
 
 	print('Obj: %g' % m.objVal)
 

@@ -2,11 +2,8 @@ from atalhos import *
 import random
 import copy
 
-#g = gt.load_graph("huhu.xml")
 g = gt.collection.data["dolphins"]
-#g = gt.collection.data["karate"]
 random.seed(1)
-#nome = g.new_graph_property("nome");
 
 verms = random.sample(range(0, g.num_vertices()), int(g.num_vertices() * 0.3))
 azuis = random.sample([i for i in range(0, g.num_vertices()) if i not in verms], int(g.num_vertices() * 0.2))
