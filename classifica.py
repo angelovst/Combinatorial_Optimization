@@ -9,24 +9,7 @@ import itertools
 #  subject to
 #        x[i] + x[j] + x[k] >= 1, (i,j in VERMELHO and k in AZUL) or (i,j in AZUL and k in VERMELHO) and k in H({i,j})
 #        [x[i] binary for i in V] 
-'''
-def naoArestas(g, v1, v2):
 
-	tuplas = []
-
-	for i in v1:
-		naoVizinho = [False for _ in g.get_vertices()]
-		for j in v2:
-			naoVizinho[j] = (j > i)
-		for j in g.vertex(i).all_neighbors():
-			naoVizinho[g.vertex_index[j]] = False
-
-		a = [(g.vertex_index[i], g.vertex_index[j]) for j in g.get_vertices() if naoVizinho[g.vertex_index[j]]]
-
-		tuplas += a
-
-	return tuplas
-'''
 def naoArestas(g, v, tuplas):
 
 	for i in v:
@@ -93,17 +76,15 @@ try:
 	'''
 	print(5)
 
-	nAzul = random.randint(1, len(azuis))
-	azuisSelecionados = random.sample(azuis,nAzul)
+	for v in g.get_vertices():
+		x[g.vertex_index[v]].start = 0.0
 
-	for i in azuisSelecionados:
-		x[i].start = 1.0
-
-	nVermelho = random.randint(1, len(verms))
-	vermsSelecionados = random.sample(verms,nVermelho)
-
-	for i in vermsSelecionados:
-		x[i].start = 1.0
+	if len(verms) > len(azuis):
+		for i in azuis:
+			x[i].start = 1.0
+	else:
+		for i in verms:
+			x[i].start = 1.0
 		
 
 	# Optimize model
